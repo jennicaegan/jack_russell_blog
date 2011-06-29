@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe UsersController do
   render_views
+
+  ##############################################################################
   
   describe "GET 'index'" do
 
@@ -53,7 +55,17 @@ describe UsersController do
                                            :content => "Next")
       end
     end
+    
+    describe "for admin users" do
+      
+      before(:each) do
+        admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(admin)
+      end
+    end
   end
+  
+  ##############################################################################
 
   describe "GET 'new'" do
     it "should be successful" do
@@ -87,6 +99,8 @@ describe UsersController do
       end
   end
   
+  ##############################################################################
+  
   describe "GET 'show'" do
     before(:each) do
       @user = Factory(:user)
@@ -116,7 +130,17 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector("h1>img", :class => "gravatar")
     end
+    
+    it "should show the user's posts" do
+      p1 = Factory(:post, :user => @user, :title => "Foo bar", :content => "rab ooF")
+      p2 = Factory(:post, :user => @user, :title => "Baz quux", :content => "xuuq zaB")
+      get :show, :id => @user
+      response.should have_selector("span.content", :content => p1.content)
+      response.should have_selector("span.content", :content => p2.content)
+    end
   end
+  
+  ##############################################################################
   
   describe "POST 'create'" do
     describe "failure" do
@@ -172,6 +196,8 @@ describe UsersController do
     end
   end
   
+  ##############################################################################
+  
   describe "GET 'edit'" do
 
     before(:each) do
@@ -196,6 +222,8 @@ describe UsersController do
                                          :content => "change")
     end
   end
+  
+  ##############################################################################
   
   describe "PUT 'update'" do
 
@@ -248,6 +276,8 @@ describe UsersController do
     end
   end
   
+  ##############################################################################
+  
   describe "authentication of edit/update pages" do
 
     before(:each) do
@@ -285,6 +315,8 @@ describe UsersController do
       end
     end
   end
+  
+  ##############################################################################
   
   describe "DELETE 'destroy'" do
 

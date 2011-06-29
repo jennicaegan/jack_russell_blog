@@ -195,3 +195,66 @@ ul.users {
 .users li {
   list-style: none;
 }
+
+/* Posts */
+
+h1.post {
+  margin-bottom: 0.3em;
+}
+
+table.posts {
+  margin-top: 1em;
+}
+
+table.posts tr {
+  height: 70px;
+}
+
+table.posts tr td.gravatar {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  width: 50px;
+}
+
+table.posts tr td.post {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  padding-top: 10px;
+}
+
+table.posts tr td.post span.title {
+	display: block;
+	font-size: 110%;
+	font-weight: bold;
+}
+
+table.posts tr td.post span.timestamp {
+  display: block;
+  font-size: 85%;
+  color: #666;
+}
+
+div.user_info img {
+  padding-right: 0.1em;
+}
+
+div.user_info a {
+  text-decoration: none;
+}
+
+div.user_info span.user_name {
+  position: absolute;
+}
+
+div.user_info span.posts {
+  font-size: 80%;
+}
+
+form.new_post {
+  margin-bottom: 2em;
+}
+
+form.new_post textarea {
+  height: 4em;
+  margin-bottom: 0;
+}
