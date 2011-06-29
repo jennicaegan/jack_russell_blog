@@ -4,10 +4,7 @@ describe "Posts" do
 
   before(:each) do
     user = Factory(:user)
-    visit signin_path
-    fill_in :email,    :with => user.email
-    fill_in :password, :with => user.password
-    click_button
+    integration_sign_in(user)
   end
   
   describe "creation" do
@@ -40,6 +37,16 @@ describe "Posts" do
           response.should have_selector("span.content", :content => content)
         end.should change(Post, :count).by(1)
       end
+    end
+  end
+  
+  describe "destruction" do
+    
+    it "should not have delete links for other users' posts" do
+      other_user = Factory(:user, :name => "Bob", :email => "another@example.com")
+      get "/users"
+      click_link "Bob"
+      response.should_not have_selector("a", :content => "delete")
     end
   end
 end

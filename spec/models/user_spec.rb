@@ -10,6 +10,8 @@ describe User do
       :password_confirmation => "foobar"
     }
   end
+  
+  #################### Creation validations (except password) ####################
 
   it "should create a new instance given valid attributes" do
     User.create!(@attr)
@@ -61,7 +63,8 @@ describe User do
     user_with_duplicate_email.should_not be_valid
   end
   
-  
+  #############################################################################
+   
   describe "password validations" do
 
     it "should require a password" do
@@ -87,6 +90,7 @@ describe User do
     end
   end
   
+  #############################################################################
   
   describe "password encryption" do
 
@@ -132,6 +136,8 @@ describe User do
     end
   end
   
+  #############################################################################
+  
   describe "admin attribute" do
 
     before(:each) do
@@ -152,16 +158,7 @@ describe User do
     end
   end
   
-  describe "post associations" do
-
-    before(:each) do
-      @user = User.create(@attr)
-    end
-
-    it "should have a posts attribute" do
-      @user.should respond_to(:posts)
-    end
-  end
+  #############################################################################
   
   describe "post associations" do
 
@@ -179,6 +176,13 @@ describe User do
       @user.posts.should == [@p2, @p1]
     end
     
+    it "should destroy associated posts" do
+      @user.destroy
+      [@p1, @p2].each do |post|
+        Post.find_by_id(post.id).should be_nil
+      end
+    end
+    
     describe "status feed" do
 
       it "should have a feed" do
@@ -186,15 +190,81 @@ describe User do
       end
 
       it "should include the user's posts" do
-        @user.feed.include?(@p1).should be_true
-        @user.feed.include?(@p2).should be_true
+        @user.feed.should include(@p1)
+        @user.feed.should include(@p2)
       end
 
       it "should not include a different user's posts" do
         p3 = Factory(:post,
                       :user => Factory(:user, :email => Factory.next(:email)))
-        @user.feed.include?(p3).should be_false
+        @user.feed.should_not include(p3)
       end
+      
+      it "should include the posts of followed users" do
+        followed = Factory(:user, :email => Factory.next(:email))
+        p3 = Factory(:post, :user => followed)
+        @user.follow!(followed)
+        @user.feed.should include(p3)
+      end
+    end
+  end
+  
+  #############################################################################
+  
+  describe "relationships" do
+
+    before(:each) do
+      @user = User.create!(@attr)
+      @followed = Factory(:user)
+    end
+
+    it "should have a relationships method" do
+      @user.should respond_to(:relationships)
+    end
+    
+    it "should have a following method" do
+      @user.should respond_to(:following)
+    end
+    
+    it "should have a following? method" do
+      @user.should respond_to(:following?)
+    end
+
+    it "should have a follow! method" do
+      @user.should respond_to(:follow!)
+    end
+
+    it "should follow another user" do
+      @user.follow!(@followed)
+      @user.should be_following(@followed)
+    end
+
+    it "should include the followed user in the following array" do
+      @user.follow!(@followed)
+      @user.following.should include(@followed)
+    end
+    
+    it "should have an unfollow! method" do
+      @followed.should respond_to(:unfollow!)
+    end
+
+    it "should unfollow a user" do
+      @user.follow!(@followed)
+      @user.unfollow!(@followed)
+      @user.should_not be_following(@followed)
+    end
+    
+    it "should have a reverse_relationships method" do
+      @user.should respond_to(:reverse_relationships)
+    end
+
+    it "should have a followers method" do
+      @user.should respond_to(:followers)
+    end
+
+    it "should include the follower in the followers array" do
+      @user.follow!(@followed)
+      @followed.followers.should include(@user)
     end
   end
 end
