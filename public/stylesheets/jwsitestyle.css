@@ -1,0 +1,92 @@
+#bg {
+	background-image: url("/images/stripes.png");
+	text-align:center;
+}
+
+#centered {
+	text-align:center;
+}
+
+#header {
+	color: 	#6D6968;
+}
+
+#headerBox {
+	background: #95B9C7;
+	position:relative;
+	margin-left: auto;
+	margin-right: auto;
+	border:5px;
+	border-style: solid;
+	border-color:#D48920;
+}
+
+#red {
+	color:#990000;
+	font-size: 30px;
+}
+
+#brown, h2 {
+	color: #965507;
+	font-size: 20px;
+}
+
+#jTextBox {
+	background: #95B9C7;
+	text-align:center;
+	position:absolute;
+	width:40%;
+	color:#990000;
+	border:5px;
+	border-style: solid;
+	border-color:#D48920;
+	font-size: 30px;
+}
+
+#wTextBox {
+	text-align:center;
+	background: #95B9C7;
+	position:absolute;
+	right:8px;
+	width: 40%;
+	color:#990000;
+	border:5px;
+	border-style: solid;
+	border-color:#D48920;
+}
+
+#text {
+	text-align: left;
+	padding-left:10px;
+	font-size: 16px;
+	word-wrap: break-word;
+	color: 	#6D6968
+}
+
+/*#footer {
+	position: absolute;
+	bottom: 10px;
+	left: right;
+	padding-top: 10px;
+}*/
+
+* {
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+   	min-height: 100%;
+   	height: auto !important;
+  	height: 100%;
+  	margin: 0 auto -4em;
+}
+
+.footer, .push {
+  	height: 4em;
+	clear: both;
+}
+

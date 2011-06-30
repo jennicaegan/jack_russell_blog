@@ -13,6 +13,11 @@ describe Relationship do
     @relationship.save!
   end
   
+  it "should destroy relationships with user" do
+    @followed.destroy
+    Relationship.find_by_id(@followed.id).should be_nil
+  end
+  
   ###############################################################################
   
   describe "follow methods" do
@@ -52,4 +57,6 @@ describe Relationship do
       @relationship.should_not be_valid
     end
   end
+  
+  ###############################################################################
 end

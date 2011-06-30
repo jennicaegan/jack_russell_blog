@@ -4,6 +4,7 @@
 
 body {
   background: #cff;
+  background-image: url("/images/stripes.png");
 }
 
 header {
@@ -12,18 +13,22 @@ header {
 
 header img {
   padding: 1em;
-  background: #fff;
+  background: #FFFFF2;
+  border:5px;
+  border-style: solid;
+  border-color:#D48920;
 }
 
 section {
   margin-top: 1em;
   font-size: 120%;
   padding: 20px;
-  background: #fff;
+  background: #FFFFF2;
 }
 
 section h1 {
   font-size: 200%;
+  color: #990000;
 }
 
 footer {
@@ -41,17 +46,17 @@ footer nav {
 /* Links */
 
 a {
-  color: #09c;
+  color:#990000;
   text-decoration: none;
 }
 
 a:hover {
-  color: #069;
+  color: #53868B;
   text-decoration: underline;
 }
 
 a:visited {
-  color: #069;
+  color:#53868B;
 }
 
 /* Navigation */
@@ -61,7 +66,10 @@ nav {
 }
 
 nav {
-  background-color: white;
+  background: #FFFFF2;
+  border:5px;
+  border-style: solid;
+  border-color:#D48920;
   padding: 0 0.7em;
   white-space: nowrap;
 }
@@ -83,7 +91,7 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #09c;
+  color: #53868B;
 }
 
 nav ul li a:hover {
@@ -99,7 +107,7 @@ a.signup_button {
   text-align: center;
   width: 190px;
   color: #fff;
-  background: #006400;
+  background: #D48920;
   font-size: 150%;
   font-weight: bold;
   padding: 20px;
@@ -196,7 +204,7 @@ ul.users {
   list-style: none;
 }
 
-/* Posts */
+/* Show posts */
 
 h1.post {
   margin-bottom: 0.3em;
@@ -220,6 +228,7 @@ table.posts tr td.post {
   border-top: 1px solid #ccc;
   vertical-align: top;
   padding-top: 10px;
+  color: #218868;
 }
 
 table.posts tr td.post span.title {
@@ -233,6 +242,8 @@ table.posts tr td.post span.timestamp {
   font-size: 85%;
   color: #666;
 }
+
+/* User info */
 
 div.user_info img {
   padding-right: 0.1em;
@@ -248,13 +259,16 @@ div.user_info span.user_name {
 
 div.user_info span.posts {
   font-size: 80%;
+  color: #2F4F4F;
 }
+
+/* New post */
 
 form.new_post {
   margin-bottom: 2em;
 }
 
 form.new_post textarea {
-  height: 4em;
+  height: 20em;
   margin-bottom: 0;
 }

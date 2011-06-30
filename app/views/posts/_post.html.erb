@@ -1,5 +1,6 @@
 <tr>
   <td class="post">
+    <span class="title"><%= post.title %></span>
     <span class="content"><%= post.content %></span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(post.created_at) %> ago.
