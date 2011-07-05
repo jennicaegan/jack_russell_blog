@@ -1,7 +1,7 @@
 <tr>
   <td class="gravatar">
     <a href="<%= user_path(current_user) %>">
-    <%= gravatar_for current_user, :size => 60 %>
+    <%= gravatar_for feed_item.user, :size => 60 %>
     <span class="user">
       <%= link_to feed_item.user.name, feed_item.user %>
     </span>
