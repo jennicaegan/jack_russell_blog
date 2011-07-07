@@ -1,0 +1,13 @@
+<table class="front" summary="The User">
+  <tr>
+    <td class="main">
+      <table class="posts" summary="User Post">
+        <tr><%= render @post %></tr>
+      </table>
+    </td>
+    <td class="sidebar round">
+      <%= render 'shared/user_info' %>
+      <%= render 'shared/stats' %>
+    </td>
+  </tr>
+</table>

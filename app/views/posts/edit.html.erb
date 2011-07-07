@@ -1,0 +1,14 @@
+<h1>Edit post</h1>
+<table class= "posts", summary= "Edit post">
+  <tr>
+    <td>
+      <%= form_for(@post) do |f| %>
+        <%= render 'fields', :f => f %>
+      <% end %>
+    </td>
+    <td class="sidebar round">
+      <%= render 'shared/user_info' %>
+      <%= render 'shared/stats' %>
+    </td>
+  </tr>
+</table>

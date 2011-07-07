@@ -10,7 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110629151036) do
+ActiveRecord::Schema.define(:version => 20110705203428) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "reply_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+  add_index "comments", ["reply_id"], :name => "index_comments_on_reply_id"
+
+  create_table "conversations", :force => true do |t|
+    t.integer  "speaker_id"
+    t.integer  "listener_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "conversations", ["listener_id"], :name => "index_conversations_on_listener_id"
+  add_index "conversations", ["speaker_id"], :name => "index_conversations_on_speaker_id"
 
   create_table "posts", :force => true do |t|
     t.string   "content"
