@@ -132,12 +132,12 @@ describe PostsController do
     end
 
     it "should be successful" do
-      get :edit, :id => @post
+      get :edit, :id => @post.id
       response.should be_success
     end
 
     it "should have the right title" do
-      get :edit, :id => @post
+      get :edit, :id => @post.id
       response.should have_selector("title", :content => "Edit post")
     end
   end
