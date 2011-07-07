@@ -3,11 +3,11 @@
     <a href="<%= user_path(current_user) %>">
     <%= gravatar_for current_user, :size => 60 %>
     <span class="user">
-      <%= link_to feed_item.user.name, feed_item.user %>
+      <%= link_to feed_item.user.name, feed_item %>
     </span>
   </td>
   <td class="post">
-    <span class="title"><%= feed_item.title %></span>
+    <span class="title"><%= link_to feed_item.title, post_path(feed_item) %></span>
     <span class="content"><%= feed_item.content %></span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(feed_item.created_at) %> ago.

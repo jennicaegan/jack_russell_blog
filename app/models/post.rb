@@ -1,8 +1,21 @@
+# == Schema Information
+# Schema version: 20110705203428
+#
+# Table name: posts
+#
+#  id         :integer         not null, primary key
+#  content    :string(255)
+#  user_id    :integer
+#  title      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Post < ActiveRecord::Base
   attr_accessible :content, :title
   
-  belongs_to :user
-  
+  belongs_to  :user
+
   validates :title, :presence => true,
                     :length => { :maximum => 50 }
   validates :content, :presence => true
@@ -22,5 +35,5 @@ class Post < ActiveRecord::Base
                         WHERE follower_id = :user_id)
       where("user_id IN (#{following_ids}) OR user_id = :user_id",
             { :user_id => user })
-    end
+    end 
 end

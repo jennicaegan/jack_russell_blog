@@ -101,4 +101,44 @@ describe PostsController do
       end
     end
   end
+  
+  ###########################################################################
+  
+  describe "GET 'show'" do
+    
+    before(:each) do
+      @user = Factory(:user)
+      @post = Factory(:post, :user => @user)
+    end
+    
+    it "should be successful" do
+      get :show, :id => @post
+      response.should be_success
+    end
+    
+    it "should find the right post" do
+      get :show, :id => @post
+      assigns(:post).should == @post
+    end
+  end
+  
+  ###########################################################################
+  
+  describe "GET 'edit'" do
+
+    before(:each) do
+      @user = Factory(:user)
+      @post = Factory(:post, :user => @user)
+    end
+
+    it "should be successful" do
+      get :edit, :id => @post
+      response.should be_success
+    end
+
+    it "should have the right title" do
+      get :edit, :id => @post
+      response.should have_selector("title", :content => "Edit post")
+    end
+  end
 end

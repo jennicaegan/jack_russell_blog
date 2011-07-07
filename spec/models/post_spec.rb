@@ -83,4 +83,7 @@ describe Post do
       Post.from_users_followed_by(@user).should_not include(@third_post)
     end
   end
+  
+  ###########################################################################
+ 
 end
