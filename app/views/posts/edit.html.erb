@@ -3,7 +3,7 @@
   <tr>
     <td>
       <%= form_for(@post) do |f| %>
-        <%= render 'fields', :f => f %>
+        <%= render 'shared/post_form', :f => f %>
       <% end %>
     </td>
     <td class="sidebar round">

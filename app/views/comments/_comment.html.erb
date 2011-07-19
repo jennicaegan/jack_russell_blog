@@ -1,0 +1,12 @@
+<tr>
+  <td class="comment">
+    <span class="content"><%= comment.content %></span>
+    <% if current_user?(comment.user) %>
+    <span>
+      <%= link_to "delete", comment, :method => :destroy,
+                                  :confirm => "You sure?",
+                                  :title => "Delete" %>
+    </span>
+    <% end %>
+  </td>
+</tr>

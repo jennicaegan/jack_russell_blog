@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
-    @user = @post.user
+    @comment = @post.comments.build
     @title = @post.user.name + ' | ' + @post.title
   end
   

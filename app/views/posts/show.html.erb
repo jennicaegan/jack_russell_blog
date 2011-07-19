@@ -1,9 +1,17 @@
-<table class="front" summary="The User">
+<table class="front" summary="The Post">
   <tr>
     <td class="main">
-      <table class="posts" summary="User Post">
-        <tr><%= render @post %></tr>
+      <table class="posts" summary="User posts">
+          <%= render @post %>
       </table>
+     <% unless @post.comments.empty? %>
+        <table class="comments" summary="Post comments">
+          <%= render :partial => 'comments/comment',
+                     :collection => @post.comments,
+                     :locals => {:user => current_user} %>
+        </table>
+      <% end %>
+      <%= render 'shared/comment_form' %>
     </td>
     <td class="sidebar round">
       <%= render 'shared/user_info' %>
