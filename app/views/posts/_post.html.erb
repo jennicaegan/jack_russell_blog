@@ -1,7 +1,7 @@
 <tr>
   <td class="post">
     <span class="title"><%= link_to post.title, post %></span>
-    <span class="content"><%= post.content %></span>
+    <span class="content"><%= wrap(post.content) %></span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(post.created_at) %> ago.
     </span>

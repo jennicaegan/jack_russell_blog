@@ -107,8 +107,9 @@ describe PostsController do
   describe "GET 'show'" do
     
     before(:each) do
-      @user = Factory(:user)
+      @user = test_sign_in(Factory(:user))
       @post = Factory(:post, :user => @user)
+      @post.save
     end
     
     it "should be successful" do
@@ -127,8 +128,9 @@ describe PostsController do
   describe "GET 'edit'" do
 
     before(:each) do
-      @user = Factory(:user)
+      @user = test_sign_in(Factory(:user))
       @post = Factory(:post, :user => @user)
+      @post.save
     end
 
     it "should be successful" do

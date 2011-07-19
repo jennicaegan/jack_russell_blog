@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Post do
-
+  
   before(:each) do
     @user = Factory(:user)
     @attr = { :title => "value for title",
