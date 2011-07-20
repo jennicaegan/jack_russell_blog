@@ -7,15 +7,14 @@
      <% unless @post.comments.empty? %>
         <table class="comments" summary="Post comments">
           <%= render :partial => 'comments/comment',
-                     :collection => @post.comments,
-                     :locals => {:user => current_user} %>
+                     :collection => @post.comments %>
         </table>
       <% end %>
       <%= render 'shared/comment_post_form' %>
     </td>
     <td class="sidebar round">
-      <%= render 'shared/user_info' %>
-      <%= render 'shared/stats' %>
+      <%= render 'shared/user_info', :locals => { @user => @post.user } %>
+      <%= render 'shared/stats', :locals => { @user => @post.user } %>
     </td>
   </tr>
 </table>

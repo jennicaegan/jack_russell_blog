@@ -12,6 +12,13 @@
                                      :confirm => "You sure?" %>
     </span>
     <% end %>
+    <div class="actions">
+      <% if current_user?(comment.user) %>
+        <%= link_to "delete", comment, :method => :delete,
+                                       :confirm => "You sure?",
+                                       :title => "Delete" %>
+      <% end %>
+    </div>
   </td>
 </tr>
 
