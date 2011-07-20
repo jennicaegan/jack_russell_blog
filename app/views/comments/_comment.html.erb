@@ -1,12 +1,17 @@
 <tr>
   <td class="comment">
     <span class="content"><%= comment.content %></span>
+    <% unless comment.comments.empty? %>
+      <ul class="comment_list">
+        <%= render 'comments/comment', :collection => comment.comments %>
+      </ul>
+    <% end %>
     <% if current_user?(comment.user) %>
     <span>
       <%= link_to "delete", comment, :method => :destroy,
-                                  :confirm => "You sure?",
-                                  :title => "Delete" %>
+                                     :confirm => "You sure?" %>
     </span>
     <% end %>
   </td>
 </tr>
+

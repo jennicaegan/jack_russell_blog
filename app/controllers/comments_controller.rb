@@ -1,25 +1,27 @@
 class CommentsController < ApplicationController
   before_filter :get_parent
+  before_filter :post, :only => [:create, :destroy]
 
+  def new
+    @title = "Speak"
+    @comment = Comment.new
+  end
+  
   def create
     @comment = @parent.comments.build(params[:comment])
     @comment.user = current_user
 
     if @comment.save
       flash[:success] = "Comment created!"
-      redirect_to post_path(@parent)
+      redirect_to post_path(@post)
     else
-      render :new
+      redirect_to post_path(@post)
     end
   end
   
   def destroy
     @comment.destroy
-    redirect_back_or root_path
-  end
-  
-  def index
-    @comments = @parent.comments
+    redirect_back_or post_path(@post)
   end
 
   protected
@@ -31,9 +33,8 @@ class CommentsController < ApplicationController
       redirect_to root_path unless defined?(@parent)
     end
     
-    def get_post(thing)
-      return unless @parent.class == Post
-      @parent = @parent.get_parent
-      get_post(thing)
+    def post
+      return @post if defined?(@post)
+      @post = commentable.is_a?(Post) ? commentable : commentable.post
     end
 end

@@ -7,7 +7,7 @@ describe Comment do
     @post = @user.posts.create(:title => "value for title",
                                :content => "value for content")
     @post.save
-    @attr = { :content => "value for content" }
+    @attr = { :content => "value for content", :user => @user }
   end
     
   it "should create a new instance given valid attributes" do
@@ -18,7 +18,6 @@ describe Comment do
 
     before(:each) do
       @comment = @post.comments.create(@attr)
-      @comment.user = @user
     end
 
     it "should have a user attribute" do
@@ -37,24 +36,27 @@ describe Comment do
       @comment = @post.comments.create(@attr)
       @reply = @comment.comments.create(@attr)
     end
+    
+    describe "post associations" do
       
-    it "should have a post attribute" do
-      @comment.should respond_to(:post)
-    end
+      it "should have a post attribute" do
+        @comment.should respond_to(:post)
+      end
     
-    it "should find the root post if it's the direct parent" do
-      @comment.post.should == @post
-    end
+      it "should find the root post if it's the direct parent" do
+        @comment.post.should == @post
+      end
     
-    it "should find the root post even if it's several levels up" do
-      comment3 = @reply.comments.create(@attr)
-      comment3.post.should == @post
-    end
+      it "should find the root post even if it's several levels up" do
+        comment3 = @reply.comments.create(@attr)
+        comment3.post.should == @post
+      end
     
-    it "should cache the result in an instance variable" do
-      @comment.post.should == @post
-      @comment.should_receive(:commentable).never
-      @comment.post.should == @post
+      it "should cache the result in an instance variable" do
+        @comment.post.should == @post
+        @comment.should_receive(:commentable).never
+        @comment.post.should == @post
+      end
     end
   end
 end
