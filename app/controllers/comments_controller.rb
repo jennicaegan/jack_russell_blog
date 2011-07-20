@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       flash[:success] = "Comment created!"
-      redirect_to post_path(@post)
+      render post_path(@post)
     else
       redirect_to post_path(@post)
     end
