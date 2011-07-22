@@ -14,6 +14,7 @@ Blog::Application.routes.draw do
   end
     
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :password_resets
   resources :relationships, :only => [:create, :destroy]
 
   match '/signup',  :to => 'users#new'

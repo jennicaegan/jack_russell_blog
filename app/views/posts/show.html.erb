@@ -10,11 +10,7 @@
                      :collection => @post.comments %>
         </table>
       <% end %>
-      <%= render 'shared/comment_post_form' %>
-    </td>
-    <td class="sidebar round">
-      <%= render 'shared/user_info', :locals => { @user => @post.user } %>
-      <%= render 'shared/stats', :locals => { @user => @post.user } %>
+      <%= render 'shared/comment_form' %>
     </td>
   </tr>
 </table>

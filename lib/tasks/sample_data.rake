@@ -5,6 +5,7 @@ namespace :db do
     make_users
     make_posts
     make_relationships
+    make_comments
   end
 end
 
@@ -26,7 +27,7 @@ def make_users
 end
 
 def make_posts
-  User.all(:limit => 6).each do |user|
+  User.all(:limit => 12).each do |user|
     10.times do
       title = Faker::Name.name
       content = Faker::Lorem.sentence(5)
@@ -44,26 +45,19 @@ def make_relationships
   followers.each { |follower| follower.follow!(user) }
 end
 
-def make_conversations
+def make_comments
   users = User.all(:limit => 25)
   user = users.first
-  a_post = user.posts.first
   
-  listening = users[1..24]
-  speaking  = users[2..18]
+  listeners = users[3..10]
+  speakers  = users[1..10]
   
-  listening.each do |listener|
-    listen_post = listener.posts.first
-    title = Faker::Name.name
-    content = Faker::Lorem.sentence(5)
-    user_post = user.posts.create!(:title => title, :content => content)
-    user_post.speak!(listen_post)
-  end
-  
-  speaking.each do |speaker|
-    title = Faker::Name.name
-    content = Faker::Lorem.sentence(5)
-    speak_post = speaker.posts.create!(:title => title, :content => content)
-    speak_post.speak!(a_post)
+  listeners.each do |l|
+    speakers.each do |s|
+      listen_post = l.posts.first
+      content = Faker::Lorem.sentence(5)
+      comment = listen_post.comments.create!(:content => content)
+      comment.user_id = s.id
+    end
   end
 end

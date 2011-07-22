@@ -12,12 +12,14 @@ class SessionsController < ApplicationController
       render 'new'
     else
       sign_in user
+      flash[:success] = "Signed in!"
       redirect_back_or user
     end
   end
   
   def destroy
     sign_out
+    flash[:success] = "Signed out!"
     redirect_to root_path
   end
 end
