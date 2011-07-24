@@ -5,6 +5,11 @@
     <span class="timestamp">
       Posted <%= time_ago_in_words(post.created_at) %> ago.
     </span>
+    <a href="<%= post_path(post) %>">
+      <span class="stat">
+        <%= pluralize(post.comments.count, "comment") %>
+      </span>
+    </a>
     <% if current_user?(post.user) %>
     <span>
       <%= link_to "edit",   edit_post_path(post) %>

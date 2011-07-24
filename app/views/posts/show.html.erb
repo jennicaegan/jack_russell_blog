@@ -3,6 +3,9 @@
     <td class="main">
       <table class="posts" summary="User posts">
           <%= render @post %>
+          <span>
+            <%= link_to "back", root_path %>
+          </span>
       </table>
      <% unless @post.comments.empty? %>
         <table class="comments" summary="Post comments">

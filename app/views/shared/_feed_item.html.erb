@@ -7,11 +7,19 @@
     </span>
   </td>
   <td class="post">
-    <span class="title"><%= link_to feed_item.title, post_path(feed_item) %></span>
-    <span class="content"><%= wrap(feed_item.content) %></span>
+    <span class="title"><%= link_to feed_item.title, feed_item %></span>
+    <span class="content">
+      <%= raw(truncate(feed_item.content, :length => 200,
+                       :omission => "... #{link_to('[more]', feed_item)}")) %>
+    </span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
     </span>
+    <a href="<%= post_path(feed_item) %>">
+      <span class="stat">
+        <%= pluralize(feed_item.comments.count, "comment") %>
+      </span>
+    </a>
     <span>
       <% if current_user?(feed_item.user) %>
         <%= link_to "delete", feed_item, :method => :delete,
